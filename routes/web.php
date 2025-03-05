@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('front.layouts.app');
+    return view('front.index');
 })->name('home');
 
 

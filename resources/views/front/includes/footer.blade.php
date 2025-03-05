@@ -35,22 +35,19 @@
                                     <div class="tf-collapse-content">
                                         <ul class="footer-menu-list">
                                             <li class="text-caption-1">
-                                                <a href="about-us.html" class="footer-menu_item">About Us</a>
+                                                <a href="{{route('home')}}" class="footer-menu_item">Home</a>
                                             </li>
                                             <li class="text-caption-1">
-                                                <a href="#" class="footer-menu_item">Our Stories</a>
+                                                <a href="{{route('about')}}" class="footer-menu_item">About Us</a>
                                             </li>
                                             <li class="text-caption-1">
-                                                <a href="#" class="footer-menu_item">Size Guide</a>
+                                                <a href="{{route('products')}}" class="footer-menu_item">Products</a>
                                             </li>
                                             <li class="text-caption-1">
-                                                <a href="contact.html" class="footer-menu_item">Contact us</a>
+                                                <a href="{{route('blogs')}}" class="footer-menu_item">Blogs</a>
                                             </li>
                                             <li class="text-caption-1">
-                                                <a href="#" class="footer-menu_item">Career</a>
-                                            </li>
-                                            <li class="text-caption-1">
-                                                <a href="my-account.html" class="footer-menu_item">My Account</a>
+                                                <a href="{{route('contact')}}" class="footer-menu_item">Contact</a>
                                             </li>
                                         </ul>
                                     </div>

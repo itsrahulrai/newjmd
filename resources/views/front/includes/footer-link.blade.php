@@ -58,3 +58,4 @@
             document.getElementById('nav-' + sectionId).classList.add('active');
         }
     </script>
+     @stack('script')

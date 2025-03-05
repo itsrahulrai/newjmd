@@ -49,7 +49,7 @@
                         </a>
                     </div>
                     <div class="col-xl-3 col-md-4 col-4">
-                        <a href="index.html" class="logo-header">
+                        <a href="{{route('home')}}" class="logo-header">
                             <img src="{{asset($web->logolight)}}" alt="logo" class="img-fluid mt-2 mb-2" style="max-width: 100px; height: auto;">
                         </a>
 
@@ -58,7 +58,7 @@
                         <nav class="box-navigation text-center">
                             <ul class="box-nav-ul d-flex align-items-center justify-content-center">
                                 <li class="menu-item active">
-                                    <a href="#" class="item-link">Home</a>
+                                    <a href="{{route('home')}}" class="item-link">Home</a>
 
                                 </li>
                                 <li class="menu-item">

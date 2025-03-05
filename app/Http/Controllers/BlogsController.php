@@ -33,45 +33,45 @@ class BlogsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'category_id' => 'required|exists:categories,id',
-            'name' => 'required|string',
-            'content' => 'required|string',
-            'thumbnail' => 'required|image|mimes:jpeg,png,jpg',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg',
-        ]);
-
-        try {
-            $thumbnailPath = $this->uploadImage($request, 'thumbnail', 'uploads/thumbnails');
-            $blog = Blog::create([
-                'category_id' => $request->category_id,
-                'name' => $request->name,
-                'slug' => Str::slug($request->name),
-                'content' => $request->content,
-                'meta_title' => $request->meta_title,
-                'meta_description' => $request->meta_description,
-                'meta_keywords' => $request->meta_keywords,
-                'og_title' => $request->og_title,
-                'og_description' => $request->og_description,
-                'thumbnail' => $thumbnailPath,
+        public function store(Request $request)
+        {
+            $request->validate([
+                'category_id' => 'required|exists:categories,id',
+                'name' => 'required|string',
+                'content' => 'required|string',
+                'thumbnail' => 'required|image|mimes:jpeg,png,jpg',
+                'images.*' => 'nullable|image|mimes:jpeg,png,jpg',
             ]);
-            if ($request->hasFile('images')) {
-                $imagesPaths = $this->uploadMultiImage($request, 'images', 'uploads/images');
-                foreach ($imagesPaths as $imagePath) {
-                    $blog->media()->create([
-                        'path' => $imagePath,
-                    ]);
+
+            try {
+                $thumbnailPath = $this->uploadImage($request, 'thumbnail', 'uploads/thumbnails');
+                $blog = Blog::create([
+                    'category_id' => $request->category_id,
+                    'name' => $request->name,
+                    'slug' => Str::slug($request->name),
+                    'content' => $request->content,
+                    'meta_title' => $request->meta_title,
+                    'meta_description' => $request->meta_description,
+                    'meta_keywords' => $request->meta_keywords,
+                    'og_title' => $request->og_title,
+                    'og_description' => $request->og_description,
+                    'thumbnail' => $thumbnailPath,
+                ]);
+                if ($request->hasFile('images')) {
+                    $imagesPaths = $this->uploadMultiImage($request, 'images', 'uploads/images');
+                    foreach ($imagesPaths as $imagePath) {
+                        $blog->media()->create([
+                            'path' => $imagePath,
+                        ]);
+                    }
                 }
+                session()->flash('success', 'Blog created successfully!');
+                return redirect()->back();
+            } catch (Exception $e) {
+                \Log::error('Error creating blog: ' . $e->getMessage());
+                return redirect()->back();
             }
-            session()->flash('success', 'Blog created successfully!');
-            return redirect()->back();
-        } catch (Exception $e) {
-            \Log::error('Error creating blog: ' . $e->getMessage());
-            return redirect()->back();
         }
-    }
 
   
     /**

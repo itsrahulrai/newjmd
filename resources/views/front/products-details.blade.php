@@ -1,38 +1,17 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
-
-<head>
-    <meta charset="utf-8">
-    <title>New Project</title>
-
-    <meta name="author" content="themesflat.com">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="Themesflat Modave, Multipurpose eCommerce Template">
-
-    <!-- Head link Start -->
-    <?php include './includes/head-link.php' ?>
-    <!-- Head link End -->
-
-</head>
-
-<body class="preload-wrapper">
-
-    <?php include './includes/scoller.php' ?>
-
-
-    <div id="wrapper">
-
-        <!-- Header -->
-        <?php include './includes/header.php' ?>
+@extends('front.layouts.app')
+@section('title')
+Product Details - JMD
+@endsection
+@section('content')
 <!-- page-title -->
-<div class="page-title" style="background-image: url(images/section/page-title.jpg);">
+<div class="page-title" style="background-image: url({{asset('front/images/section/page-title.jpg')}});">
     <div class="container-full">
         <div class="row">
             <div class="col-12">
                 <h3 class="heading text-center">Women</h3>
                 <ul class="breadcrumbs d-flex align-items-center justify-content-center">
                     <li>
-                        <a class="link" href="index.html">Homepage</a>
+                        <a class="link" href="{{route('home')}}">Homepage</a>
                     </li>
                     <li>
                         <i class="icon-arrRight"></i>
@@ -61,7 +40,7 @@
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide d-flex justify-content-center align-items-center overflow-hidden">
                                         <img class="img-fluid rounded-4 zoom-effect"
-                                            src="images/collections/grid-cls/DP.png"
+                                            src="{{asset('front/images/collections/grid-cls/DP.png')}}"
                                             alt="Product Image" width="400" height="400">
                                     </div>
                                 </div>
@@ -108,20 +87,5 @@
     </div>
 </section>
 
-<!-- /Product_Main -->k
-
-
-
-        <!-- Footer Section Start -->
-        <?php include "./includes/footer.php" ?>
-        <!-- Footer Sectuin End -->
-
-
-    </div>
-
-    <!-- Footer Section Start -->
-    <?php include "./includes/footer-link.php" ?>
-    <!-- Footer Sectuin End -->
-</body>
-
-</html>
+<!-- /Product_Main -->
+@endsection

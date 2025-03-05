@@ -4,9 +4,8 @@
 @endsection
 @push('style')
 @endpush
-@section('content')
+@section('content')k
     <div class="side-app">
-
 
         <!-- PAGE-HEADER -->
         <div class="breadcrumb-6">
