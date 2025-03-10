@@ -1,35 +1,40 @@
 <?php
 
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RegisterController;
 
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
 //     return view('welcome');
+// })->name('home');    
+
+
+// Route::get('/', function () {
+//     return view('front.index');
 // })->name('home');
 
 
-Route::get('/', function () {
-    return view('front.index');
-})->name('home');
+
+Route::get('/',[HomeController::class, 'index'])->name('home');
+Route::get('products',[HomeController::class, 'Products'])->name('products');
+Route::get('/product/{slug}', [HomeController::class, 'show'])->name('product.details');
+
+
+Route::get('blogs',[HomeController::class, 'blogs'])->name('blogs');
+Route::get('blogs/{slug}', [HomeController::class, 'blogsDetails'])->name('blogs.details');
+
+
+Route::post('submit-enquiry', [HomeController::class, 'Enquiry'])->name('enquiry.store');
+
 
 
 Route::get('about', function () {
     return view('front.about');
 })->name('about');
 
-Route::get('blogs', function () {
-    return view('front.blogs');
-})->name('blogs');
 
-Route::get('blogs-details', function () {
-    return view('front.blogs-details');
-})->name('blogs.details');
-
-Route::get('products', function () {
-    return view('front.products');
-})->name('products');
 
 Route::get('products-details', function () {
     return view('front.products-details');

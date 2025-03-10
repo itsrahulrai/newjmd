@@ -41,7 +41,7 @@
                     value="{{ isset($web) ? e($web->email) : e(old('email')) }}">
             </div>
         </div>
-        <div class="col-sm-6 col-md-6">
+        <div class="col-sm-6     col-md-6">
             <div class="form-group">
                 <label class="form-label">Phone<span class="text-red">*</span></label>
                 <input type="number" class="form-control" name="phone" placeholder="Phone"

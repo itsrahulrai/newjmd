@@ -58,7 +58,7 @@
                                 </div>
 
                                 <!-- Thumbnail Field -->
-                                <div class="col-sm-6 col-md-6">
+                                <div class="col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <label class="form-label">Thumbnail</label>
                                         <input type="file" class="form-control" name="thumbnail">
@@ -71,35 +71,7 @@
 
                                     </div>
                                 </div>
-                                <!-- Multiple Images -->
-                                <div class="col-sm-6 col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-label">Multiple Images</label>
-                                        <input type="file" class="form-control" name="images[]" multiple>
-                                        @isset($blog->media)
-                                            @if ($blog->media->count())
-                                                <div class="existing-images mt-3">
-                                                    @foreach ($blog->media as $image)
-                                                        <div class="existing-image mb-3"
-                                                            style="display: inline-block; margin-right: 10px; text-align: center;">
-                                                            <img src="{{ asset($image->path) }}" alt="Image"
-                                                                class="img-thumbnail"
-                                                                style="width: 100px; height: 100px; object-fit: cover;">
-                                                            <div class="delete-footer" style="margin-top: 10px;">
-                                                                <a href="{{ route('admin.blog.images.destroy', $image->id) }}"
-                                                                    class="btn btn-danger btn-square delete-item  br-50 m-1"
-                                                                    data-bs-toggle="tooltip" title=""
-                                                                    data-bs-original-title="Delete"><i
-                                                                        class="fe fe-trash fs-13"></i>
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            @endif
-                                        @endisset
-                                    </div>
-                                </div>
+                               
                                 <!-- Content Field -->
                                 <div class="col-12">
                                     <div class="form-group">

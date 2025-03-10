@@ -37,15 +37,12 @@ class TestimonialsController extends Controller
             'name' => 'required|string',
             'occupation' => 'required|string',
             'content' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
         try {
-            $imagePath = $this->uploadImage($request, 'image', 'uploads/testimonial');
            Testimonial::create([
                 'name' => $request->name,
                 'occupation' => $request->occupation,
                 'content' => $request->content,
-                'image' => $imagePath,
             ]);
             session()->flash('success', 'Testimonial created successfully!');
             return redirect()->back();
@@ -82,7 +79,6 @@ class TestimonialsController extends Controller
             'name' => 'required|string',
             'occupation' => 'required|string',
             'content' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         try {
@@ -90,10 +86,6 @@ class TestimonialsController extends Controller
             $testimonial->name = $request->name;
             $testimonial->occupation = $request->occupation;
             $testimonial->content = $request->content;
-            if ($request->hasFile('image')) {
-                $this->deleteImage($testimonial->image);
-                $testimonial->image = $this->updateImage($request, 'image', 'uploads/testimonial', $testimonial->image);
-            }
             $testimonial->save();
 
             session()->flash('success', 'Testimonial updated successfully!');
@@ -112,9 +104,6 @@ class TestimonialsController extends Controller
     {
         try {
             $testimonial = Testimonial::findOrFail($id);
-            if ($testimonial->image) {
-                $this->deleteImage($testimonial->image);
-            }
             $testimonial->delete();
             session()->flash('success', 'Testimonial deleted successfully!');
             return redirect()->route('admin.testimonials.index');

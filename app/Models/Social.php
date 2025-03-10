@@ -9,11 +9,11 @@ class Social extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'facebook',
-        'instagram',
-        'twitter',
-        'youtube',
-        'linkedin',
-    ];
+        protected $fillable = [
+            'facebook',
+            'instagram',
+            'twitter',
+            'youtube',
+            'linkedin',
+        ];
 }

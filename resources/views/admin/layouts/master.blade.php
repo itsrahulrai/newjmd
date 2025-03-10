@@ -28,9 +28,7 @@
     <!-- SIDE-MENU CSS -->
     <link href="{{ asset('assets/admin/css/sidemenu.css') }}" rel="stylesheet" id="sidemenu-theme">
 
-    <!--C3 CHARTS CSS -->
-    <link href="{{ asset('assets/admin/plugins/charts-c3/c3-chart.css') }}" rel="stylesheet" />
-
+  
     <!-- P-scroll bar css-->
     <link href="{{ asset('assets/admin/plugins/p-scroll/perfect-scrollbar.css') }}" rel="stylesheet" />
 
@@ -43,13 +41,6 @@
     <!-- TABS STYLES -->
     <link href="{{ asset('assets/admin/plugins/tabs/tabs.css') }}" rel="stylesheet" />
 
-
-    <!-- FORN WIZARD CSS -->
-    <link href="{{ asset('assets/admin/plugins/formwizard/smart_wizard.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/admin/plugins/formwizard/smart_wizard_theme_arrows.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/admin/plugins/formwizard/smart_wizard_theme_circles.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/admin/plugins/formwizard/smart_wizard_theme_dots.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/admin/plugins/forn-wizard/css/demo.css') }}" rel="stylesheet">
 
 
     <!-- SELECT2 CSS -->
@@ -81,18 +72,7 @@
     <!-- Include Sweetalert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-   
-
-    <!-- GALLERY CSS -->
-    <link href="{{ asset('assets/admin/plugins/gallery/gallery.css') }}" rel="stylesheet">
-
-    <!-- flatpickr CSS -->
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-
 
 
  <!-- summernote CSS -->
@@ -175,29 +155,12 @@
     <script src="{{ asset('assets/admin/plugins/tabs/jquery.multipurpose_tabcontent.js') }}"></script>
     <script src="{{ asset('assets/admin/plugins/tabs/tab-content.js') }}"></script>
 
-    <!-- FORM WIZARD JS-->
-    <script src="{{ asset('assets/admin/plugins/formwizard/jquery.smartWizard.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/formwizard/fromwizard.js') }}"></script>
-
+   
     <!-- INTERNAl Jquery.steps js -->
     <script src="{{ asset('assets/admin/plugins/jquery-steps/jquery.steps.min.js') }}"></script>
     <script src="{{ asset('assets/admin/plugins/parsleyjs/parsley.min.js') }}"></script>
 
-    <!-- INTERNAL Accordion-Wizard-Form js-->
-    <script src="{{ asset('assets/admin/plugins/accordion-Wizard-Form/jquery.accordion-wizard.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/js/form-wizard.js') }}"></script>
-
-
-    <!-- CHARTJS CHART JS-->
-    <script src="{{ asset('assets/admin/plugins/chart/Chart.bundle.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/chart/utils.js') }}"></script>
-
-
-
-    <!-- PIETY CHART JS-->
-    <script src="{{ asset('assets/admin/plugins/peitychart/jquery.peity.min.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/peitychart/peitychart.init.js') }}"></script>
-
+  
     <!-- INTERNAL SELECT2 JS -->
     <script src="{{ asset('assets/admin/plugins/select2/select2.full.min.js') }}"></script>
 
@@ -218,12 +181,6 @@
     <script src="{{ asset('assets/admin/js/table-data.js') }}"></script>
 
 
-    <!-- ECHART JS-->
-    <script src="{{ asset('assets/admin/plugins/echarts/echarts.js') }}"></script>
-
-    <!-- APEXCHART JS -->
-    <script src="{{ asset('assets/admin/js/apexcharts.js') }}"></script>
-
     <!-- INDEX JS -->
     <script src="{{ asset('assets/admin/js/index1.js') }}"></script>
 
@@ -231,17 +188,6 @@
     <script src="{{ asset('assets/admin/plugins/accordion/accordion.min.js') }}"></script>
     <script src="{{ asset('assets/admin/plugins/accordion/accordion.js') }}"></script>
 
-
-    <!-- GALLERY JS -->
-    <script src="{{ asset('assets/admin/plugins/gallery/picturefill.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/gallery/lightgallery.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/gallery/lightgallery-1.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/gallery/lg-pager.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/gallery/lg-autoplay.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/gallery/lg-fullscreen.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/gallery/lg-zoom.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/gallery/lg-hash.js') }}"></script>
-    <script src="{{ asset('assets/admin/plugins/gallery/lg-share.js') }}"></script>
 
 
     <!-- CUSTOM JS-->
@@ -385,7 +331,6 @@
         $('#content22').summernote({
             height: 200,
         });
-
         
         $('#content23').summernote({
             height: 200,
@@ -393,8 +338,6 @@
         $('#content24').summernote({
             height: 200,
         });
-
-       
     });
 </script>
 </body>

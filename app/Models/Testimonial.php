@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Testimonial extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'occupation', 'content', 'image'];
+    protected $fillable = ['name', 'occupation', 'content'];
 
 }

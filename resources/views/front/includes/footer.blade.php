@@ -1,4 +1,4 @@
-<footer id="footer" class="footer">
+    <footer id="footer" class="footer">
         <div class="footer-wrap">
             <div class="footer-body">
                 <div class="container">
@@ -6,7 +6,7 @@
                         <div class="col-lg-4">
                             <div class="footer-infor">
                                 <div class="footer-logo">
-                                    <a href="index.html">
+                                    <a href="{{route('home')}}">
                                         <img src="{{asset($web->logolight)}}" alt="logo" class="img-fluid mt-2 mb-2" style="max-width: 100px; height: auto;">
                                     </a>
                                 </div>
@@ -58,24 +58,11 @@
                                     </div>
                                     <div class="tf-collapse-content">
                                         <ul class="footer-menu-list">
+                                        @foreach ($categories as $category)
                                             <li class="text-caption-1">
-                                                <a href="#" class="footer-menu_item">MCB & RCCB</a>
+                                                <a href="{{ route('products', ['category_id' => $category->id]) }}" class="footer-menu_item">{{ $category->name }}</a>
                                             </li>
-                                            <li class="text-caption-1">
-                                                <a href="#" class="footer-menu_item">Switches & Accessories</a>
-                                            </li>
-                                            <li class="text-caption-1">
-                                                <a href="#" class="footer-menu_item">Distribution Boards</a>
-                                            </li>
-                                            <li class="text-caption-1">
-                                                <a href="#" class="footer-menu_item">Wires & Cables</a>
-                                            </li>
-                                            <li class="text-caption-1">
-                                                <a href="#" class="footer-menu_item">Switchgears</a>
-                                            </li>
-                                            <li class="text-caption-1">
-                                                <a href="#" class="footer-menu_item">Electrical Accessories</a>
-                                            </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>

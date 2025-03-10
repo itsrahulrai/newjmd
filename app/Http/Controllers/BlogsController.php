@@ -40,7 +40,6 @@ class BlogsController extends Controller
                 'name' => 'required|string',
                 'content' => 'required|string',
                 'thumbnail' => 'required|image|mimes:jpeg,png,jpg',
-                'images.*' => 'nullable|image|mimes:jpeg,png,jpg',
             ]);
 
             try {
@@ -57,14 +56,6 @@ class BlogsController extends Controller
                     'og_description' => $request->og_description,
                     'thumbnail' => $thumbnailPath,
                 ]);
-                if ($request->hasFile('images')) {
-                    $imagesPaths = $this->uploadMultiImage($request, 'images', 'uploads/images');
-                    foreach ($imagesPaths as $imagePath) {
-                        $blog->media()->create([
-                            'path' => $imagePath,
-                        ]);
-                    }
-                }
                 session()->flash('success', 'Blog created successfully!');
                 return redirect()->back();
             } catch (Exception $e) {
@@ -102,7 +93,6 @@ class BlogsController extends Controller
             'name' => 'required|string',
             'content' => 'required|string',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg',
-            'images.*' => 'nullable|image|mimes:jpeg,png,jpg',
         ]);
 
         try {
@@ -118,20 +108,12 @@ class BlogsController extends Controller
             $blog->og_description = $request->og_description;
 
             if ($request->hasFile('image')) {
-                $this->deleteImage($testimonial->image);
-                $thumbnail->thumbnail = $this->updateImage($request, 'thumbnail', 'uploads/thumbnail', $thumbnail->image);
+                $this->deleteImage($blog->image);
+                $blog->thumbnail = $this->updateImage($request, 'thumbnail', 'uploads/thumbnail', $blog->image);
             }
             $blog->save();
-            if ($request->hasFile('images')) {
-                $blog->media()->delete();
-                $imagesPaths = $this->uploadMultiImage($request, 'images', 'uploads/images');
-                foreach ($imagesPaths as $imagePath) {
-                    $blog->media()->create([
-                        'path' => $imagePath,
-                    ]);
-                }
-            }
-            session()->flash('success', 'Blog updated successfully!');
+          
+            session()->flash('success', 'Blog updated successfully!');  
             return redirect()->route('admin.blogs.index');
         } catch (Exception $e) {
             \Log::error('Error updating blog: ' . $e->getMessage());

@@ -13,4 +13,7 @@
     <!-- Favicon and Touch Icons  -->
     <link rel="shortcut icon" href="{{asset('front/images/logo/favicon.png')}}">
     <link rel="apple-touch-icon-precomposed" href="{{asset('front/images/logo/favicon.png')}}">
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
     @stack('style')

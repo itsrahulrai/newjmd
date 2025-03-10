@@ -1,8 +1,4 @@
 
-  
- 
- 
-
    
     <!-- Javascript -->
     <script type="text/javascript" src="{{asset('front/js/bootstrap.min.js')}}"></script>
@@ -57,5 +53,21 @@
             // Add active class to the clicked nav link
             document.getElementById('nav-' + sectionId).classList.add('active');
         }
+
+        
     </script>
+    <!-- Toastr JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+ <!-- Toastr Success Message -->
+<script>
+    @if(session()->has('success'))
+        toastr.success("{{ session('success') }}");
+    @endif
+
+    @if(session()->has('error'))
+        toastr.error("{{ session('error') }}");
+    @endif
+</script>
+    
      @stack('script')

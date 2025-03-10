@@ -51,10 +51,10 @@
         </li>
         
        
-        <li class="slide">
+        <!-- <li class="slide">
             <a class="side-menu__item" data-bs-toggle="slide" href="{{route('admin.pages.index')}}"><i
                     class="side-menu__icon fe fe-file-text"></i><span class="side-menu__label">Pages</span></a>
-        </li>
+        </li> -->
         <li class="slide">
             <a class="side-menu__item" data-bs-toggle="slide" href="{{route('admin.settings.index')}}"><i
                     class="side-menu__icon fe fe-settings"></i><span class="side-menu__label">Settings</span></a>

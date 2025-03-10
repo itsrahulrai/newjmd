@@ -2,6 +2,43 @@
 @section('title')
 Product - JMD
 @endsection
+@push('style')
+<style>
+    .loader-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+    }
+
+    .ring {
+        --f: 1;
+        width: 13em;
+        height: 13em;
+        transform: scale(var(--f));
+        opacity: var(--f);
+        background: radial-gradient(circle at 20% 20%, rgba(0, 0, 0, 0.1) calc((10% - 2px)), transparent calc((10% - 1px))), 
+                    radial-gradient(circle at 50% 10%, black calc((10% - 2px)), transparent calc((10% - 1px))), 
+                    radial-gradient(circle at 80% 20%, rgba(0, 0, 0, 0.1) calc((10% - 2px)), transparent calc((10% - 1px))), 
+                    radial-gradient(circle at 90%, black calc((10% - 2px)), transparent calc((10% - 1px))), 
+                    radial-gradient(circle at 80% 80%, rgba(0, 0, 0, 0.1) calc((10% - 2px)), transparent calc((10% - 1px))), 
+                    radial-gradient(circle at 50% 90%, black calc((10% - 2px)), transparent calc((10% - 1px))), 
+                    radial-gradient(circle at 20% 80%, rgba(0, 0, 0, 0.1) calc((10% - 2px)), transparent calc((10% - 1px))), 
+                    radial-gradient(circle at 10%, black calc((10% - 2px)), transparent calc((10% - 1px)));
+        animation: rotation 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+    }
+
+    .ring > .ring {
+        --f: 0.6;
+    }
+
+    @keyframes rotation {
+        to {
+            transform: scale(var(--f)) rotate(1turn);
+        }
+    }
+</style>
+@endpush
 @section('content')
 
 <!-- page-title -->
@@ -46,14 +83,20 @@ Product - JMD
                             </div>
                             <div class="canvas-body">
                                 <div class="widget-facet facet-categories">
-                                    <h6 class="facet-title">Product Categories</h6>
-                                    <ul class="facet-content">
-                                        <li><a href="#" class="categories-item active">MCB & RCCB</a></li>
-                                        <li><a href="#" class="categories-item">SWITCHES & ACCESSORIES</a></li>
-                                        <li><a href="#" class="categories-item">DISTRIBUITION BOARDS </a></li>
-                                        <li><a href="#" class="categories-item">WIRES & CABLES</a></li>
-                                        <li><a href="#" class="categories-item">SWITCHGEARSS</a></li>
-                                        <li><a href="#" class="categories-item">ELECTRICAL ACCESSORIES</a></li>
+                                    <h6 class="facet-title">Categories</h6>
+                                    <ul class="nav nav-pills flex-column custom-nav">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" href="javascript:void(0);" onclick="fetchProducts()">
+                                                <i class="fas fa-globe me-2"></i> All Products
+                                            </a>
+                                        </li>
+                                        @foreach ($categories as $category)
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="javascript:void(0);" onclick="fetchProducts('{{ $category->id }}')">
+                                                <i class="{{ $category->icon ?? 'fas fa-bolt' }} me-2"></i> {{ $category->name }}
+                                            </a>
+                                        </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
@@ -62,48 +105,11 @@ Product - JMD
                     </div>
                 </div>
                 <div class="col-xl-9">
-                    <div class="tf-grid-layout wrapper-shop tf-col-3" id="gridLayout">
-                        <!-- Card 1 -->
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="{{asset('front/images/collections/grid-cls/DP.png')}}" alt="Washing Machine">
-                            </div>
-                            <h3 class="product-title"><a href="products-details.php">GOLD SERIES</a></h3>
-                            <p class="product-description">Enhance your space with the GOLD SERIES MCB & RCCB</p>
-                            <a href="products-details.php" class="view-btn">View More <i class="icon icon-arrowUpRight"></i></a>
-                        </div>
-                        <!-- Card 1 -->
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="{{asset('front/images/collections/grid-cls/DP.png')}}" alt="Washing Machine">
-                            </div>
-                            <h3 class="product-title">GOLD SERIES</h3>
-                            <p class="product-description">Enhance your space with the GOLD SERIES MCB & RCCB</p>
-                            <a href="#" class="view-btn">View More <i class="icon icon-arrowUpRight"></i></a>
-                        </div>
-                        <!-- Card 1 -->
-                        <div class="product-card">
-                            <div class="product-image">
-                                <img src="{{asset('front/images/collections/grid-cls/DP.png')}}" alt="Washing Machine">
-                            </div>
-                            <h3 class="product-title">GOLD SERIES</h3>
-                            <p class="product-description">Enhance your space with the GOLD SERIES MCB & RCCB</p>
-                            <a href="#" class="view-btn">View More <i class="icon icon-arrowUpRight"></i></a>
-                        </div>
-
-
-
-                        <!-- pagination -->
-                        <ul class="wg-pagination justify-content-center">
-                            <li><a href="#" class="pagination-item text-button">1</a></li>
-                            <li class="active">
-                                <div class="pagination-item text-button">2</div>
-                            </li>
-                            <li><a href="#" class="pagination-item text-button">3</a></li>
-                            <li><a href="#" class="pagination-item text-button"><i class="icon-arrRight"></i></a></li>
-                        </ul>
+                    <div id="product-list">
+                        @include('front.partials.products-list')
                     </div>
                 </div>
+
             </div>
 
         </div>
@@ -111,3 +117,27 @@ Product - JMD
 </section>
 <!-- /Section product -->
 @endsection
+
+@push('script')
+<script>
+    function fetchProducts(categoryId = '') {
+        // Show loader
+        $('#product-list').html('<div class="loader-container"><div class="ring"><div class="ring"><div class="ring"><div class="ring"></div></div></div></div></div></div>');
+
+        $.ajax({
+            url: "{{ route('products') }}",
+            type: "GET",
+            data: {
+                category_id: categoryId
+            },
+            success: function(data) {
+                $('#product-list').html(data);
+            }
+        });
+    }
+</script>
+
+
+
+
+@endpush

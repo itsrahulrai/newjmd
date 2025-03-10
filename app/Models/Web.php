@@ -9,7 +9,7 @@ class Web extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'logolight',     
+        'logolight',        
         'logodark',      
         'name',
         'email',         

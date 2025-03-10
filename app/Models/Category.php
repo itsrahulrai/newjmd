@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'slug', 'status', 'parent_id'];
+    protected $fillable = ['name', 'slug','image','icon', 'status', 'parent_id'];
 
     public function galleries()
     {
@@ -26,4 +26,18 @@ class Category extends Model
     {
         return $this->belongsTo(Category::class, 'parent_id');
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+   
+    public function Subchildren()
+    {
+        return $this->hasMany(Category::class, 'parent_id')->with('children'); // Ensure recursive loading
+    }
+
+
+
 }

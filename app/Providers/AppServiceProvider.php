@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
@@ -30,9 +31,13 @@ class AppServiceProvider extends ServiceProvider
             return "<?php echo route($expression) ?>";
         });
 
-         // Share `$web` with all views
         View::share('web', Web::first());
 
+        $categories = Category::whereNull('parent_id')
+        ->with('children')
+        ->orderBy('name', 'asc')
+        ->get();
+        View::share('categories', $categories);
     }
 }
 

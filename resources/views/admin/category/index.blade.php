@@ -40,8 +40,8 @@
                                 <thead>
                                     <tr>
                                         <th class="wd-15p border-bottom-0">S NO.</th>
+                                        <th class="wd-15p border-bottom-0">Image</th>
                                         <th class="wd-15p border-bottom-0">Name</th>
-                                        <th class="wd-15p border-bottom-0">Type</th>
                                         <th class="wd-10p border-bottom-0">Status</th>
                                         <th class="wd-25p border-bottom-0">Action</th>
                                     </tr>
@@ -50,8 +50,12 @@
                                     @foreach ($categories as $category)
                                         <tr>
                                             <td>{{ ++$loop->index }}</td>
+                                            <td>
+                                                <img src="{{ $category->image ? asset($category->image) : asset('assets/admin/images/images.jpeg') }}" 
+                                                    alt="Category Image" 
+                                                    style="width: 100px; height: auto;">
+                                            </td>
                                             <td>{{ $category->name }}</td>
-                                            <td>{{ $category->type }}</td>
                                              <td>
                                                 <label class="custom-switch">
                                                     <input type="checkbox" class="custom-switch-input change-status" data-id="{{ $category->id }}" {{ $category->status == 'active' ? 'checked' : '' }}>

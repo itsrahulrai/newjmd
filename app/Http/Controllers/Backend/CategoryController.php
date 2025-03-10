@@ -6,18 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Traits\ImageUploadTrait;
 
 
 class CategoryController extends Controller
 {
+    use ImageUploadTrait;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categories = Category::latest()->get();
-        return view('admin.category.index',compact('categories'));
+        $categories = Category::whereNull('parent_id')->latest()->get();
+        return view('admin.category.index', compact('categories'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -33,17 +36,24 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|unique:categories,name',
-        ]);
-        Category::create([
-            'name' => $request->name,
-            'slug' => Str::slug($request->name),
-        ]);
-        session()->flash('success', 'Category created successfully.');
+        try {
+            $request->validate([
+                'name' => 'required|unique:categories,name',
+            ]);
+            $thumbnailPath = $this->uploadImage($request, 'image', 'uploads/thumbnails');
+            Category::create([
+                'name' => $request->name,
+                'icon' => $request->icon,
+                'slug' => Str::slug($request->name),
+                'image' => $thumbnailPath,
+            ]);
+            session()->flash('success', 'Category created successfully.');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Something went wrong: ' . $e->getMessage());
+        }
         return redirect()->back();
     }
-
+    
     /**
      * Display the specified resource.
      */
@@ -64,18 +74,40 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        $request->validate([
-            'name' => 'required|unique:categories,name,' . $id,
-        ]);
-        Category::findOrFail($id)->update([
-            'name' => $request->name,
-            'slug' => Str::slug($request->name),
-        ]);
-        session()->flash('success', 'Category updated successfully.');
-        return redirect()->back();
-    }
+   
+
+
+     public function update(Request $request, string $id)
+     {
+         try {
+             $request->validate([
+                 'name' => 'required|unique:categories,name,' . $id,
+             ]);
+             $category = Category::findOrFail($id);
+             $thumbnailPath = $category->image;
+     
+             if ($request->hasFile('image')) {
+                 if ($category->image && file_exists(public_path($category->image))) {
+                     unlink(public_path($category->image));
+                 }
+                 $thumbnailPath = $this->uploadImage($request, 'image', 'uploads/thumbnails');
+             }
+             $category->update([
+                 'name' => $request->name,
+                 'icon' => $request->icon,
+                 'slug' => Str::slug($request->name),
+                 'image' => $thumbnailPath,
+             ]);
+     
+             session()->flash('success', 'Category updated successfully.');
+         } catch (\Exception $e) {
+             session()->flash('error', 'Something went wrong: ' . $e->getMessage());
+         }
+     
+         return redirect()->back();
+     }
+     
+
 
     /**
      * Remove the specified resource from storage.
