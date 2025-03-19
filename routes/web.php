@@ -10,15 +10,11 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // })->name('home');    
 
-
-// Route::get('/', function () {
-//     return view('front.index');
-// })->name('home');
-
-
-
 Route::get('/',[HomeController::class, 'index'])->name('home');
-Route::get('products',[HomeController::class, 'Products'])->name('products');
+// Route::get('products',[HomeController::class, 'Products'])->name('products');
+
+Route::get('categories/{slug?}', [HomeController::class, 'Products'])->name('products');
+
 Route::get('/product/{slug}', [HomeController::class, 'show'])->name('product.details');
 
 
@@ -78,7 +74,9 @@ Route::post('/recharge/{userId}', [RegisterController::class, 'recharge'])->name
 
 
 
-
+Route::fallback(function () {
+    return response()->view('404', [], 404);
+});
 
 
 /* ======= Frontend Website  Routes End  ========== */

@@ -10,6 +10,7 @@ class Contact extends Model
     use HasFactory;
 
     protected $fillable = [
+        'product_id',
         'fname',
         'lname',
         'email',
@@ -21,5 +22,11 @@ class Contact extends Model
         'option',
         'message',
     ];
+    
+     // Relationship with Product
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
     
 }

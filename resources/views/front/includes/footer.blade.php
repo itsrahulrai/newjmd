@@ -1,4 +1,10 @@
-    <footer id="footer" class="footer">
+<!-- Banner countdown -->
+<img class="lazyload" data-src="{{ asset('front/images/banner/img-countdown1.png') }}"
+                            src="{{ asset('front/images/banner/img-countdown1.png') }}"
+    alt="banner">
+        <!-- /Banner countdown -->
+
+  <footer id="footer" class="footer">
         <div class="footer-wrap">
             <div class="footer-body">
                 <div class="container">
@@ -6,22 +12,22 @@
                         <div class="col-lg-4">
                             <div class="footer-infor">
                                 <div class="footer-logo">
-                                    <a href="{{route('home')}}">
-                                        <img src="{{asset($web->logolight)}}" alt="logo" class="img-fluid mt-2 mb-2" style="max-width: 100px; height: auto;">
-                                    </a>
+                                        <a href="{{route('home')}}">
+                                            <img src="{{asset($web->logolight)}}" alt="logo" class="img-fluid mt-2 mb-2" style="max-width: 100px; height: auto;">
+                                        </a>
                                 </div>
                                 <div class="footer-address">
-                                    <p>549 Oak St.Crystal Lake, IL 60014</p>
-                                    <a href="contact.html" class="tf-btn-default fw-6">GET DIRECTION<i class="icon-arrowUpRight"></i></a>
+                                    <p>{{$web->address}}</p>
+                                    <!-- <a href="contact.html" class="tf-btn-default fw-6">GET DIRECTION<i class="icon-arrowUpRight"></i></a> -->
                                 </div>
                                 <ul class="footer-info">
                                     <li>
                                         <i class="icon-mail"></i>
-                                        <p>jmd@gmail.com</p>
+                                        <p>{{$web->email}}</p>
                                     </li>
                                     <li>
                                         <i class="icon-phone"></i>
-                                        <p>315-666-6688</p>
+                                        <p>{{$web->phone}}</p>
                                     </li>
                                 </ul>
                             </div>
@@ -58,9 +64,9 @@
                                     </div>
                                     <div class="tf-collapse-content">
                                         <ul class="footer-menu-list">
-                                        @foreach ($categories as $category)
+                                            @foreach ($categories as $category)
                                             <li class="text-caption-1">
-                                                <a href="{{ route('products', ['category_id' => $category->id]) }}" class="footer-menu_item">{{ $category->name }}</a>
+                                                <a href="{{ route('products', ['slug' => $category->slug]) }}" class="footer-menu_item">{{ $category->name }}</a>
                                             </li>
                                             @endforeach
                                         </ul>
@@ -76,7 +82,7 @@
                                 </div>
                                 <div class="tf-collapse-content">
                                     <div class="footer-newsletter">
-                                        <p class="text-caption-1">Sign up for our newsletter and get 10% off your first purchase</p>
+                                    <p class="text-caption-1">Subscribe to our newsletter and stay updated with our latest offers and news!</p>
                                         <div class="sib-form">
                                             <div id="sib-form-container" class="sib-form-container">
                                                 <div id="sib-container" class="sib-container--large sib-container--vertical">
@@ -100,7 +106,7 @@
                                                                         <label class="entry__label" for="EMAIL">
                                                                         </label>
                                                                         <div class="entry__field">
-                                                                            <input class="input radius-60" type="text" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="Enter your e-mail..." data-required="true" required="">
+                                                                            <input class="input radius-60 border border-secondary" type="text" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="Enter your e-mail..." data-required="true" required="">
                                                                         </div>
                                                                     </div>
                                                                     <label class="entry__error entry__error--primary"></label>
@@ -141,9 +147,9 @@
                                                     <i class="icon-check"></i>
                                                 </div>
                                             </div>
-                                            <label class="text-caption-1" for="footer-Form_agree">
+                                            <!-- <label class="text-caption-1" for="footer-Form_agree">
                                                 By clicking subcribe, you agree to the <a class="fw-6 link" href="term-of-use.html">Terms of Service</a> and <a class="fw-6 link" href="#">Privacy Policy</a>.
-                                            </label>
+                                            </label> -->
                                         </div>
                                     </div>
                                 </div>
@@ -158,7 +164,7 @@
                         <div class="col-12">
                             <div class="footer-bottom-wrap d-flex justify-content-center py-3" style="background: #f8f9fa; border-top: 1px solid #221E1F;">
                                 <p class="text-caption-1 text-center fw-bold mb-0" style="color: #221E1F; font-size: 16px;">
-                                    © 2025 JMD. All Rights Reserved. |
+                                    © <?php echo date('Y'); ?> JMD. All Rights Reserved. |
                                     <span style="color: #221E1F; font-weight: 600;">Designed by Hover Business Services LLP</span>
                                 </p>
                             </div>
@@ -171,10 +177,10 @@
             </div>
         </div>
     </footer>
-    
+
     </div>
     </div>
-  
+
 
     <!-- mobile menu -->
     <div class="offcanvas offcanvas-start canvas-mb" id="mobileMenu">
@@ -195,44 +201,75 @@
                     </form>
                     <ul class="nav-ul-mb" id="wrapper-menu-navigation">
                         <li class="nav-mb-item active">
-                            <a href="#dropdown-menu-one" class="collapsed mb-menu-link" data-bs-toggle="collapse" aria-expanded="true" aria-controls="dropdown-menu-one">
+                            <a href="{{ route('home') }}" class="collapsed mb-menu-link" data-bs-toggle="collapse" aria-expanded="true" aria-controls="dropdown-menu-one">
                                 <span>Home</span>
                             </a>
                         </li>
-                       
-                        <li class="nav-mb-item">
-                            <a href="#dropdown-menu-three" class="collapsed mb-menu-link" data-bs-toggle="collapse" aria-expanded="true" aria-controls="dropdown-menu-three">
-                                <span>Products</span>
-                                <span class="btn-open-sub"></span>
+                        <li class="nav-mb-item active">
+                            <a href="{{ route('home') }}">
+                                <span>About us</span>
                             </a>
+                        </li>
+
+                            <li class="nav-mb-item">
+                            <a href="#dropdown-menu-three" class="collapsed mb-menu-link" data-bs-toggle="collapse" aria-expanded="true" aria-controls="dropdown-menu-three">
+                                <span>Categories</span>
+                                <span class="btn-open-sub" style="transition: 0.3s;">+</span>
+                            </a>
+
+
                             <div id="dropdown-menu-three" class="collapse">
-                                <ul class="sub-nav-menu">
-                                <li><a href="products.php" class="menu-link-text">Bulb Holder</a></li>
-                                            <li><a href="blog-detail-02.html" class="menu-link-text">Bus Bar</a></li>
-                                            <li><a href="blog-detail-02.html" class="menu-link-text">Change Overs</a></li>
-                                            <li><a href="blog-detail-02.html" class="menu-link-text">Door Bell</a></li>
-                                            <li><a href="blog-list.html" class="menu-link-text">Distribution Boxes</a></li>
-                                            <li><a href="blog-detail.html" class="menu-link-text">Electrical Accessories</a></li>
-                                            <li><a href="blog-default.html" class="menu-link-text">MCB Manufacturer</a></li>
-                                            <li><a href="blog-detail-02.html" class="menu-link-text">Rewirable Switch Fuse Unit</a></li>
-                                            <li><a href="blog-grid.html" class="menu-link-text">Wire & Cables</a></li>
-                                   
+                                <ul class="sub-nav-menu" style="list-style: none; padding: 0; margin: 0;">
+
+                                    @foreach ($categories as $category)
+                                    <li style="padding: 8px 12px;">
+                                        <a href="{{ route('products', ['slug' => $category->slug]) }}"
+                                            class="menu-link-text"
+                                            style="text-decoration: none; color: #333; font-weight: 500;">
+                                            {{ $category->name }}
+                                        </a>
+
+                                        <!-- Subcategories -->
+                                        @if ($category->children->count() > 0)
+                                        <a href="#sub-menu-{{ $category->id }}" class="collapsed" data-bs-toggle="collapse"
+                                            aria-expanded="false" aria-controls="sub-menu-{{ $category->id }}"
+                                            style="float: right; font-size: 16px; color: #666; text-decoration: none;">
+                                            +
+                                        </a>
+
+                                        <ul class="sub-sub-nav-menu collapse" id="sub-menu-{{ $category->id }}"
+                                            style="list-style: none; padding-left: 15px; margin-top: 5px;">
+                                            @foreach ($category->children as $subcategory)
+                                            <li style="padding: 6px 10px;">
+                                                <a href="{{ route('products', ['slug' => $subcategory->slug]) }}"
+                                                    class="menu-link-text"
+                                                    style="text-decoration: none; color: #666; font-weight: 400;">
+                                                    {{ $subcategory->name }}
+                                                </a>
+                                            </li>
+                                            @endforeach
+                                        </ul>
+                                        @endif
+                                    </li>
+                                    @endforeach
+
                                 </ul>
                             </div>
                         </li>
+
                         <li class="nav-mb-item">
-                            <a href="blogs.php" class="collapsed mb-menu-link" data-bs-toggle="collapse" aria-expanded="true" aria-controls="dropdown-menu-four">
-                                <span>Blog</span>
+                            <a href="{{ route('blogs') }}" class="collapsed mb-menu-link" data-bs-toggle="collapse" aria-expanded="true" aria-controls="dropdown-menu-four">
+                                <span>Blogs</span>
                             </a>
                         </li>
                         <li class="nav-mb-item">
-                            <a href="contact.php" class="collapsed mb-menu-link" data-bs-toggle="collapse" aria-expanded="true" aria-controls="dropdown-menu-four">
+                            <a href="{{ route('contact') }}" class="collapsed mb-menu-link" data-bs-toggle="collapse" aria-expanded="true" aria-controls="dropdown-menu-four">
                                 <span>Contact</span>
                             </a>
                         </li>
                     </ul>
                 </div>
-                
+
             </div>
         </div>
     </div>

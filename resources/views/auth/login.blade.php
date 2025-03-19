@@ -52,8 +52,8 @@
                     <div class="wrap-login100 p-0 col-md-4 mx-auto">
                         <div class="col col-login mx-auto mt-4 text-center">
                             <div class="text-center">
-                                <img src="{{ asset('assets/admin/images/brand/hbs-logo.PNG') }}"
-                                    class="header-brand-img" alt="" style="width: 100px; height: 50px;">
+                                <img src="{{asset($web->logolight)}}"
+                                class="header-brand-img" alt="" style="width: 100px; height: 80px;">    
                             </div>
 
                         </div>

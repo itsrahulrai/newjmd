@@ -11,6 +11,10 @@
     <script type="text/javascript" src="{{asset('front/js/wow.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('front/js/multiple-modal.js')}}"></script>
     <script type="text/javascript" src="{{asset('front/js/main.js')}}"></script>
+    
+    
+<!-- Include Swiper.js -->
+<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 
     <script src="{{asset('front/js/sibforms.js')}}" defer=""></script>
 

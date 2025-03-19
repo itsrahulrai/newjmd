@@ -31,92 +31,75 @@ Contact - JMD
         <div class="contact-us-content">
             <div class="left">
                 <h4>Get In Touch</h4>
-                <p class="text-secondary-2">Use the form below to get in touch with the sales team</p>
-                <form action="{{route('enquiry.store')}}" method="post" class="form-leave-comment">
-    @csrf
-    <div class="wrap">
-        <div class="cols">
-            <fieldset class="">
-                <input class="" type="text" placeholder="First Name*" name="fname" id="name" tabindex="2" value="" aria-required="true" required="">
-            </fieldset>
-            <fieldset class="">
-                <input class="" type="text" placeholder="Last Name*" name="lname" id="lname" tabindex="2" value="" aria-required="true" required="">
-            </fieldset>
-        </div>
-        <div class="cols">
-            <fieldset class="">
-                <input class="" type="email" placeholder="Email*" name="email" id="email" tabindex="2" value="" aria-required="true" required="">
-            </fieldset>
-            <fieldset class="">
-                <input class="" type="text" placeholder="Phone*" name="phone" id="phone" 
-                    tabindex="2" value="" aria-required="true" required=""
-                    pattern="[0-9]{10}" title="Phone number must be exactly 10 digits" maxlength="10">
-            </fieldset>
-        </div>
-        <div class="cols">
-            <fieldset class="">
-                <input class="" type="text" placeholder="State*" name="state" id="state" tabindex="2" value="" aria-required="true" required="">
-            </fieldset>
-            <fieldset class="">
-                <input class="" type="text" placeholder="District*" name="district" id="district" tabindex="2" value="" aria-required="true" required="">
-            </fieldset>
-        </div>
-        <div class="cols">
-            <fieldset class="">
-                <input class="" type="text" placeholder="City*" name="city" id="city" tabindex="2" value="" aria-required="true" required="">
-            </fieldset>
-            <fieldset class="">
-                <input class="" type="tel" placeholder="PinCode*" name="pincode" id="pincode" 
-                    tabindex="2" value="" aria-required="true" required=""
-                    pattern="[0-9]{6}" title="PinCode must be exactly 6 digits" maxlength="6">
-            </fieldset>
-        </div>
-        <div class="cols">
-            <fieldset class="">
-                <select name="option" class="form-select" tabindex="2" aria-required="true" required="">
-                    <option selected disabled>--Please choose an option--</option>
-                    <option value="Electrician">Electrician</option>
-                    <option value="Consumers">Consumers</option>
-                    <option value="Distribution">Distribution</option>
-                    <option value="Others">Others</option>
-                </select>
-            </fieldset>
-        </div>
-        <fieldset class="">
-            <textarea name="message" id="message" rows="4" placeholder="Your Message*" tabindex="2" aria-required="true" required=""></textarea>
-        </fieldset>
-    </div>
-    <div class="button-submit send-wrap">
-        <button class="tf-btn btn-fill" type="submit">
-            <span class="text text-button">Send message</span>
-        </button>
-    </div>
-</form>
+                <form action="{{ route('enquiry.store') }}" method="post" class="form-leave-comment">
+                    @csrf
+                    <div class="container">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control border border-secondary" placeholder="First Name*" name="fname" value="{{ old('fname') }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control border border-secondary" placeholder="Last Name*" name="lname" value="{{ old('lname') }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" class="form-control border border-secondary" placeholder="Email*" name="email" value="{{ old('email') }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control border border-secondary" placeholder="Phone*" name="phone" value="{{ old('phone') }}" required pattern="[0-9]{10}" title="Phone number must be exactly 10 digits" maxlength="10">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control border border-secondary" placeholder="State*" name="state" value="{{ old('state') }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control border border-secondary" placeholder="District*" name="district" value="{{ old('district') }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control border border-secondary" placeholder="City*" name="city" value="{{ old('city') }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control border border-secondary" placeholder="PinCode*" name="pincode" value="{{ old('pincode') }}" required pattern="[0-9]{6}" title="PinCode must be exactly 6 digits" maxlength="6">
+                            </div>
+                            <div class="col-md-12">
+                                <select name="option" class="form-select border border-secondary" required>
+                                    <option selected disabled>--Please choose an option--</option>
+                                    <option value="Electrician" {{ old('option') == 'Electrician' ? 'selected' : '' }}>Electrician</option>
+                                    <option value="Consumers" {{ old('option') == 'Consumers' ? 'selected' : '' }}>Consumers</option>
+                                    <option value="Distribution" {{ old('option') == 'Distribution' ? 'selected' : '' }}>Distribution</option>
+                                    <option value="Others" {{ old('option') == 'Others' ? 'selected' : '' }}>Others</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <textarea name="message" class="form-control border border-secondary" rows="4" placeholder="Your Message*" required>{{ old('message') }}</textarea>
+                                @if ($errors->has('message'))
+                                <span class="text-danger">{{ $errors->first('message') }}</span>
+                                @endif
+                            </div>
+                            <div class="button-submit send-wrap">
+                                <button class="btn btn-danger btn-lg" type="submit">
+                                    <span class="text text-button">Send message</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
 
             </div>
             <div class="right">
                 <h4>Information</h4>
                 <div class="mb_20">
                     <div class="text-title mb_8">Phone:</div>
-                    <p class="text-secondary">+1 666 234 8</p>
+                    <p class="text-secondary">{{$web->phone}}</p>
                 </div>
                 <div class="mb_20">
                     <div class="text-title mb_8">Email:</div>
-                    <p class="text-secondary">themesflat@gmail.com</p>
+                    <p class="text-secondary">{{$web->email}}</p>
                 </div>
                 <div class="mb_20">
                     <div class="text-title mb_8">Address:</div>
-                    <p class="text-secondary">2163 Phillips Gap Rd, West Jefferson, North Carolina, United States</p>
+                    <p class="text-secondary">{{$web->address}}</p>
                 </div>
-                <div>
-                    <div class="text-title mb_8">Open Time:</div>
-                    <p class="mb_4 open-time">
-                        <span class="text-secondary">Mon - Sat:</span> 7:30am - 8:00pm PST
-                    </p>
-                    <p class="open-time">
-                        <span class="text-secondary">Sunday:</span> 9:00am - 5:00pm PST
-                    </p>
-                </div>
+
             </div>
         </div>
     </div>

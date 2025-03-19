@@ -69,7 +69,7 @@
                                     data-bs-validate = "Valid email is required: ex@abc.xyz">
                                     <!-- <input class="input100" type="text" name="email" value="{{ old('email') }}"
                                         placeholder="Email"> -->
-                                        <input class="input100" type="text" name="email" value="admin@gmail.com"
+                                        <input class="input100" type="text" name="email" 
                                         placeholder="Email">
                                     <span class="focus-input100"></span>
                                     <span class="symbol-input100">
@@ -80,7 +80,7 @@
                                     @endif
                                 </div>
                                 <div class="wrap-input100 validate-input" data-bs-validate = "Password is required">
-                                    <input class="input100" type="password" name="password" placeholder="Password" value="Admin@123">
+                                    <input class="input100" type="password" name="password" placeholder="Password">
                                     <span class="focus-input100"></span>
                                     <span class="symbol-input100">
                                         <i class="zmdi zmdi-lock" aria-hidden="true"></i>

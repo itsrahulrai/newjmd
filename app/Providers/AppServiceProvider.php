@@ -3,11 +3,12 @@
 namespace App\Providers;
 
 use App\Models\Category;
+use App\Models\Social;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
-use App\Models\Web; // Import your Web model
+use App\Models\Web; 
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,6 +33,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         View::share('web', Web::first());
+        View::share('socials', Social::first());
 
         $categories = Category::whereNull('parent_id')
         ->with('children')

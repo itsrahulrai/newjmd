@@ -36,88 +36,104 @@ Blogs - JMD
             <div class="col-12">
                 <div class="tf-grid-layout md-col-3">
 
+                  @foreach($blogs->take(3) as $blog)
+    <div class="blog-card"
+        style="border-radius: 10px; overflow: hidden; box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08); background: #fff; padding: 12px; margin-bottom: 15px; display: flex; flex-direction: column; border: 1px solid #ddd; height: 100%;">
 
-                    @foreach($blogs as $blog)
-                    <div class="wg-blog style-1 hover-image">
-                        <div class="image">
-                            <img class="lazyload" data-src="{{ asset($blog->thumbnail) }}" src="{{ asset($blog->thumbnail) }}" alt="{{ $blog->name }}">
-                        </div>
-                        <div class="content">
-                            <div class="meta">
-                                <div class="meta-item gap-8">
-                                    <div class="icon">
-                                        <i class="icon-calendar"></i>
-                                    </div>
-                                    <p class="text-caption-1">{{ \Carbon\Carbon::parse($blog->created_at)->format('F d, Y') }}</p>
-                                </div>
-                                <div class="meta-item gap-8">
-                                    <div class="icon">
-                                        <i class="icon-user"></i>
-                                    </div>
-                                    <p class="text-caption-1">by <a class="link" href="#">JMD</a></p>
-                                </div>
-                            </div>
-                            <div>
-                                <h6 class="title fw-5">
-                                    <a class="link" href="{{ route('blogs.details', $blog->slug) }}">{{ $blog->name }}</a>
-                                </h6>
-                                <div class="body-text">{!! Str::limit(strip_tags($blog->content), 150) !!}</div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
+        <!-- Blog Image -->
+        <div class="blog-image" style="border-radius: 8px; overflow: hidden; height: 200px;">
+            <a href="{{ route('blogs.details', $blog->slug) }}">
+                <img class="lazyload" data-src="{{ asset($blog->thumbnail) }}" 
+                     src="{{ asset($blog->thumbnail) }}" alt="{{ $blog->name }}"
+                     style="width: 100%; height: 100%; object-fit: cover;">
+            </a>
+        </div>
+
+        <!-- Blog Content -->
+        <div class="blog-content" style="padding: 12px; flex-grow: 1; display: flex; flex-direction: column;">
+            <!-- Meta Info -->
+            <div class="meta" style="display: flex; justify-content: space-between; font-size: 12px; color: #777; margin-bottom: 6px;">
+                <div class="meta-item" style="display: flex; align-items: center; gap: 3px;">
+                    <i class="icon-calendar" style="color: #dc3545;"></i>
+                    <span>{{ \Carbon\Carbon::parse($blog->created_at)->format('M d, Y') }}</span>
+                </div>
+                <div class="meta-item" style="display: flex; align-items: center; gap: 3px;">
+                    <i class="icon-user" style="color: #dc3545;"></i>
+                    <span>by <a href="#" style="font-weight: 500; color: #dc3545;">JMD</a></span>
+                </div>
+            </div>
+
+            <!-- Blog Title -->
+            <h5 class="title" style="font-size: 16px; font-weight: 600; color: #333; margin-bottom: 4px;">
+                <a href="{{ route('blogs.details', $blog->slug) }}" style="color: #333; text-decoration: none;">
+                    {{ $blog->name }}
+                </a>
+            </h5>
+
+            <!-- Blog Description -->
+            <p class="body-text" style="font-size: 13px; color: #555; margin: 6px 0; height: 45px; overflow: hidden;">
+                {!! Str::limit(strip_tags($blog->content), 75) !!}
+            </p>
+
+            <!-- Read More Button -->
+            <a href="{{ route('blogs.details', $blog->slug) }}"
+                style="display: inline-block; padding: 6px 12px; background: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-size: 12px; text-align: center; margin-top: auto;">
+                Read More
+            </a>
+        </div>
+    </div>
+@endforeach
 
 
-
+                    <!-- Pagination -->
+                    @if ($blogs->hasPages())
                     <ul class="wg-pagination justify-content-center">
-                        @if ($blogs->hasPages())
-                        <ul class="wg-pagination justify-content-center">
-                            {{-- Previous Page Link --}}
-                            @if ($blogs->onFirstPage())
-                            <li class="disabled">
-                                <div class="pagination-item text-button"><i class="icon-arrLeft"></i></div>
-                            </li>
-                            @else
-                            <li>
-                                <a href="{{ $blogs->previousPageUrl() }}" class="pagination-item text-button">
-                                    <i class="icon-arrLeft"></i>
-                                </a>
-                            </li>
-                            @endif
+                        <!-- Previous Page -->
+                        @if ($blogs->onFirstPage())
+                        <li class="disabled">
+                            <div class="pagination-item text-button"><i class="icon-arrLeft"></i></div>
+                        </li>
+                        @else
+                        <li>
+                            <a href="{{ $blogs->previousPageUrl() }}" class="pagination-item text-button">
+                                <i class="icon-arrLeft"></i>
+                            </a>
+                        </li>
+                        @endif
 
-                            {{-- Page Numbers --}}
-                            @foreach ($blogs->getUrlRange(1, $blogs->lastPage()) as $page => $url)
-                            @if ($page == $blogs->currentPage())
-                            <li class="active">
-                                <div class="pagination-item text-button">{{ $page }}</div>
-                            </li>
-                            @else
-                            <li>
-                                <a href="{{ $url }}" class="pagination-item text-button">{{ $page }}</a>
-                            </li>
-                            @endif
-                            @endforeach
+                        <!-- Page Numbers -->
+                        @foreach ($blogs->getUrlRange(1, $blogs->lastPage()) as $page => $url)
+                        @if ($page == $blogs->currentPage())
+                        <li class="active">
+                            <div class="pagination-item text-button">{{ $page }}</div>
+                        </li>
+                        @else
+                        <li>
+                            <a href="{{ $url }}" class="pagination-item text-button">{{ $page }}</a>
+                        </li>
+                        @endif
+                        @endforeach
 
-                            {{-- Next Page Link --}}
-                            @if ($blogs->hasMorePages())
-                            <li>
-                                <a href="{{ $blogs->nextPageUrl() }}" class="pagination-item text-button">
-                                    <i class="icon-arrRight"></i>
-                                </a>
-                            </li>
-                            @else
-                            <li class="disabled">
-                                <div class="pagination-item text-button"><i class="icon-arrRight"></i></div>
-                            </li>
-                            @endif
-                        </ul>
+                        <!-- Next Page -->
+                        @if ($blogs->hasMorePages())
+                        <li>
+                            <a href="{{ $blogs->nextPageUrl() }}" class="pagination-item text-button">
+                                <i class="icon-arrRight"></i>
+                            </a>
+                        </li>
+                        @else
+                        <li class="disabled">
+                            <div class="pagination-item text-button"><i class="icon-arrRight"></i></div>
+                        </li>
                         @endif
                     </ul>
-                </div>
+                    @endif
 
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 <!-- /blog-grid -->
 @endsection

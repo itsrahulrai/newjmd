@@ -34,19 +34,6 @@
                 @method('PUT')
             @endif
             <div class="row">
-                 <!-- Image Field -->
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label class="form-label">Image</label>
-                        <input type="file" class="form-control" name="image">
-                         @isset($testimonial->image)
-                            <div class="mt-3">
-                                <img src="{{ asset($testimonial->image) }}" alt="Thumbnail"
-                                    class="img-thumbnail" style="width: 150px; height: auto;">
-                             </div>
-                        @endisset
-                    </div>
-                </div>
                 <!-- Name Field -->
                 <div class="col-md-6">
                     <div class="form-group">

@@ -36,6 +36,7 @@ Enquiry
                             <thead>
                                 <tr>
                                     <th class="wd-15p border-bottom-0">S NO.</th>
+                                      <th class="wd-15p border-bottom-0">Product</th>
                                     <th class="wd-15p border-bottom-0">First Name</th>
                                     <th class="wd-15p border-bottom-0">Last Name</th>
                                     <th class="wd-15p border-bottom-0">Phone</th>
@@ -51,6 +52,7 @@ Enquiry
                                 @foreach ($contacts as $contact)
                                 <tr>
                                     <td>{{ ++$loop->index }}</td>
+                                    <td>{{ $contact->product ? $contact->product->name : 'N/A' }}
                                     <td>{{ $contact->fname }}</td>
                                     <td>{{ $contact->lname }}</td>
                                     <td>{{ $contact->phone }}</td>
@@ -74,7 +76,8 @@ Enquiry
                                             data-district="{{ $contact->district }}"
                                             data-city="{{ $contact->city }}"
                                             data-pincode="{{ $contact->pincode }}"
-                                            data-option="{{ $contact->option }}">
+                                            data-option="{{ $contact->option }}"
+                                            data-product="{{ $contact->product ? $contact->product->name : 'N/A' }}">
                                             <i class="fe fe-eye fs-13"></i>
                                         </button>
 
@@ -126,6 +129,7 @@ Enquiry
                         <p><strong>City:</strong> <span id="modal-city"></span></p>
                         <p><strong>Pincode:</strong> <span id="modal-pincode"></span></p>
                         <p><strong>Option:</strong> <span id="modal-option"></span></p>
+                          <p><strong>Product:</strong> <span id="modal-product"></span></p>
                     </div>
                 </div>
 
@@ -157,6 +161,7 @@ Enquiry
             let city = $(this).data('city');
             let pincode = $(this).data('pincode');
             let option = $(this).data('option');
+            let product = $(this).data('product');
             let message = $(this).data('message');
 
             $('#modal-fname').text(fname);
@@ -168,6 +173,7 @@ Enquiry
             $('#modal-city').text(city);
             $('#modal-pincode').text(pincode);
             $('#modal-option').text(option);
+            $('#modal-product').text(product);
             $('#modal-message').text(message);
         });
     });

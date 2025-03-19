@@ -616,7 +616,7 @@ video {
 }
 
 .bg-surface {
-  background-color: var(--surface) !important;
+  background-color: #ffecee !important;
 }
 
 .bg-critical {
@@ -11760,8 +11760,8 @@ ul.list-tags.has-bg a {
 /*------------ testimonial ---------------- */
 .testimonial-item {
   display: flex;
-  border: 1px solid var(--line);
-  background-color: var(--white);
+  border: 1px solid #fff4f5;
+  background-color: #fff;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -14336,6 +14336,7 @@ html:not([dir=rtl]) .noUi-horizontal .noUi-handle {
 }
 
 .page-title .heading {
+  color: #fff;
   margin-bottom: 12px;
 }
 
@@ -14346,7 +14347,7 @@ ul.breadcrumbs {
 }
 
 ul.breadcrumbs li {
-  color: var(--secondary-2);
+  color: #fff;
   font-size: 14px;
   line-height: 22px;
 }
@@ -21046,12 +21047,13 @@ ul.list-text.type-number {
   background-color: #282828;
   color: white;
   border: none;
-  padding: 12px 24px;
+  padding: 10px 24px;
   border-radius: 8px;
   width: auto;
   transition: all 0.3s ease;
   text-decoration: none;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
   text-align: center;
   font-weight: 600;
   text-transform: uppercase;
@@ -21137,3 +21139,9 @@ ul.list-text.type-number {
 .zoom-effect:hover {
   transform: scale(1.1);
 }
+
+.products-para{
+  text-transform: capitalizes;
+
+}
+

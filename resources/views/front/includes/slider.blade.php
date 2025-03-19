@@ -15,7 +15,7 @@
             <img src="{{ asset('front/images/banner/banner-1.webp') }}" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-            <img src="{{ asset('front/images/banner/banner-1.webps') }}" class="d-block w-100" alt="...">
+            <img src="{{ asset('front/images/banner/banner-1.webp') }}" class="d-block w-100" alt="...">
         </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"

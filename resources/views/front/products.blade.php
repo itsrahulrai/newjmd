@@ -46,16 +46,16 @@ Product - JMD
     <div class="container-full">
         <div class="row">
             <div class="col-12">
-                <h3 class="heading text-center">Women</h3>
+                <h3 class="heading text-center">{{@$category->name}}</h3>
                 <ul class="breadcrumbs d-flex align-items-center justify-content-center">
                     <li>
-                        <a class="link" href="{{route('home')}}">Homepage</a>
+                        <a class="link" href="{{route('home')}}">Home</a>
                     </li>
                     <li>
                         <i class="icon-arrRight"></i>
                     </li>
                     <li>
-                        Women
+                    {{@$category->name}}
                     </li>
                 </ul>
             </div>
@@ -81,26 +81,26 @@ Product - JMD
                                 <h5>Filters</h5>
                                 <span class="icon-close close-filter"></span>
                             </div>
-                            <div class="canvas-body">
+                            
+                           <div class="canvas-body">
                                 <div class="widget-facet facet-categories">
                                     <h6 class="facet-title">Categories</h6>
                                     <ul class="nav nav-pills flex-column custom-nav">
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="javascript:void(0);" onclick="fetchProducts()">
+                                            <a class="nav-link active" href="javascript:void(0);" onclick="setActiveCategory(this); fetchProducts()">
                                                 <i class="fas fa-globe me-2"></i> All Products
                                             </a>
                                         </li>
                                         @foreach ($categories as $category)
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="javascript:void(0);" onclick="fetchProducts('{{ $category->id }}')">
-                                                <i class="{{ $category->icon ?? 'fas fa-bolt' }} me-2"></i> {{ $category->name }}
-                                            </a>
-                                        </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="javascript:void(0);" onclick="setActiveCategory(this); fetchProducts('{{ $category->slug }}')">
+                                                    <i class="{{ $category->icon ?? 'fas fa-bolt' }} me-2"></i> {{ $category->name }}
+                                                </a>
+                                            </li>
                                         @endforeach
                                     </ul>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -120,16 +120,13 @@ Product - JMD
 
 @push('script')
 <script>
-    function fetchProducts(categoryId = '') {
+    function fetchProducts(categorySlug = '') {
         // Show loader
         $('#product-list').html('<div class="loader-container"><div class="ring"><div class="ring"><div class="ring"><div class="ring"></div></div></div></div></div></div>');
 
         $.ajax({
-            url: "{{ route('products') }}",
+            url: "{{ url('categories') }}/" + categorySlug,
             type: "GET",
-            data: {
-                category_id: categoryId
-            },
             success: function(data) {
                 $('#product-list').html(data);
             }
@@ -137,6 +134,17 @@ Product - JMD
     }
 </script>
 
+<script>
+    function setActiveCategory(element) {
+        // Remove 'active' class from all category links
+        document.querySelectorAll('.custom-nav .nav-link').forEach(item => {
+            item.classList.remove('active');
+        });
+
+        // Add 'active' class to the clicked category
+        element.classList.add('active');
+    }
+</script>
 
 
 

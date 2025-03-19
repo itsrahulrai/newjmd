@@ -4,6 +4,14 @@
     </IfModule>
 
     RewriteEngine On
+    
+    # Block access to .env and other sensitive files
+    RewriteRule (^|/)\.(env|git|htaccess|htpasswd|config) - [F,L]
+    
+    # Block access to specific file types
+    RewriteCond %{REQUEST_URI} \.(sql|json|log|ini|bak|sh|xml)$ [NC]
+    RewriteRule .* - [F,L]
+
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .

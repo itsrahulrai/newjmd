@@ -36,7 +36,6 @@
                                 <thead>
                                     <tr>
                                         <th class="wd-15p border-bottom-0">S NO.</th>
-                                        <th class="wd-15p border-bottom-0">Profile</th>
                                         <th class="wd-15p border-bottom-0">Name</th>
                                         <th class="wd-15p border-bottom-0">Content</th>
                                         <th class="wd-15p border-bottom-0">Status</th>
@@ -47,9 +46,6 @@
                                     @foreach ($testimonials as $testimonial)
                                         <tr>
                                             <td>{{ ++$loop->index }}</td>
-                                          <td>
-                                            <img src="{{ asset($testimonial->image) }}" alt="Thumbnail" style="width: 100px; height: auto; border-radius: 10px;">
-                                        </td>
                                            <td>{{ $testimonial->name }}<br>({{ $testimonial->occupation }})</td>
                                             <td>{{ $testimonial->content }}</td>
                                             <td>
